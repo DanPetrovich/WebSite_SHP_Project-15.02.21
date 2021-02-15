@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Твой голос</title>
+<!--    <link rel="stylesheet" href="./css/index.css">-->
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+a {
+  color: teal;
+  transition: 0.3s;
+}
+a:hover {
+  color: turquoise;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.header__vote-button {
+  width: 176px;
+  height: 71px;
+  background-color: #811ebd;
+  color: white;
+  font-size: 24px;
+  border-radius: 10px;
+  margin-right: 20px;
+  border: none;
+  transition: 0.3s;
+}
+
+.header__vote-button:hover {
+  background-color: #8f4cb8;
+  box-shadow: 0px 0px 2px rgb(162, 162, 162);
+}
+
+.vote__container:hover {
+  background-color: #8f4cb8;
+  box-shadow: 0px 0px 2px rgb(162, 162, 162);
+}
+
+.header__contacts-container {
+}
+.header__heading {
+  margin: 0;
+  padding: 0;
+}
+.header__mail {
+  margin: 0;
+  padding: 0;
+}
+.href {
+}
+.vote {
+
+
+}
+.vote__container {
+  max-width: 690px;
+  background: #a779e2;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  /* align-items: flex-start; */
+  margin: 0px auto 20px auto;
+  /* border: black 2px solid; */
+  /* box-shadow: black 2px 2px; */
+  filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.15));
+
+}
+.vote__contacts-container {
+}
+.vote__text {
+  margin: 0;
+  padding: 0;
+}
+.vote__description {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+
+
+}
+.vote__likes-contain {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 7px;
+  margin-right: 10px;
+
+}
+.vote__like {
+  font-weight: 700;
+  color: black;
+}
+.vote__header {
+  max-width: 690px;
+  padding: 10px;
+  margin: 20px auto 0px auto;
+
+}
+
+.vote__v-line {
+  background-color:#505050;
+  width: 1px;
+  /* height: 100%; */
+}
+.vote__like-image{
+  background-image: url('./poll/templates/images/like.png');
+  width: 38px;
+  height: 22px;
+}
+.vote__comment-image{
+  background-image: url('./simple-votings-_/poll/templates/images/comment.png');
+  width: 38px;
+  height: 22px;
+}
+
+.vote_likes-image-text{
+  display: flex;
+  margin-bottom: 15px;
+
+}
+    </style>
+</head>
+<body>
+    <!-- Логотип , ник и мейл -->
+    <header class="header">
+        {% include "logo.html" %}
+    </header>
+    <br/>
+    <br/>
+    <h2 class="vote__header">---- Приватные голосования ----</h2>
+        {% for v in private_votings%}
+            <div class="vote__container">
+            <div class="vote__contacts-container">
+                <h2 class="vote__text">{{ v.name }}</h2>
+                <p class="vote__text">{{ v.author_id.username }}</p>
+            </div>
+            <p class="vote__description"> {{ v.description }}
+            </p>
+            <div class="vote__v-line"></div>
+            <div class="vote__likes-contain">
+                <div class="vote_likes-image-text">
+                    <div class="vote__like-image"></div>
+                    <div class="vote__like">{{ v.likes_number }}</div>
+
+                </div>
+                <div class="vote_likes-image-text">
+                    <div class="vote__comment-image"></div>
+                    <div class="vote__like">{{ v.comments_number }}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <h2 class="vote__header">---- Публичные голосования ----</h2>
+        {% for v in public_votings %}
+            {% if type == 'voting'%}
+                <div class="vote__container" onclick="Go_to_page('{{v.id}}')">
+                    <div class="vote__contacts-container">
+                        <h2 class="vote__text">{{ v.name }}</h2>
+                        <p class="vote__text">{{ v.author }}</p>
+                    </div>
+                    <p class="vote__description"> {{ v.description }}
+                    </p>
+                    <div class="vote__v-line"></div>
+                    <div class="vote__likes-contain">
+                        <div class="vote_likes-image-text">
+                            <div class="vote__like-image"></div>
+                            <div class="vote__like">{{ v.likes_number }}</div>
+
+                        </div>
+                        <div class="vote_likes-image-text">
+                            <div class="vote__comment-image"></div>
+                            <div class="vote__like">{{ v.comments_number }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="vote__container" onclick="Show_result('{{v.id}}')">
+                    <div class="vote__contacts-container">
+                        <h2 class="vote__text">{{ v.name }}</h2>
+                        <p class="vote__text">{{ v.author }}</p>
+                    </div>
+                    <p class="vote__description"> {{ v.description }}
+                    </p>
+                    <div class="vote__v-line"></div>
+                    <div class="vote__likes-contain">
+                        <div class="vote_likes-image-text">
+                            <div class="vote__like-image"></div>
+                            <div class="vote__like">{{ v.likes_number }}</div>
+
+                        </div>
+                        <div class="vote_likes-image-text">
+                            <div class="vote__comment-image"></div>
+                            <div class="vote__like">{{ v.comments_number }}</div>
+                        </div>
+                    </div>
+                </div>
+            {%endif%}
+        {% endfor %}
+    </section>
+
+</body>
+</html>
+
+<script>
+    // Переход на страницу, отображающую конкретное голосование
+    function Go_to_page(id){
+        let path = "/concrete_voting?voting_id="+id
+        window.location = path
+    }
+
+    // Переход на страницу с результатами голосованиями(если пользвователь в режиме история)
+    function Show_result(id){
+        let path = "/voting_result?voting_id="+id
+        window.location = path
+    }
+</script>

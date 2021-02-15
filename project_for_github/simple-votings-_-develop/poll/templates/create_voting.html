@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <header>
+        {% include "logo.html" %}
+    </header>
+    {% if creation_success == True %}
+    <h4>Голосование успешно создано!</h4>
+    {% else %}
+    <h4>Упс... Произошла ошибка...</h4>
+    {% endif %}
+</body>
+</html>

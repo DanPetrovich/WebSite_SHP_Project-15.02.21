@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Твой голос</title>
+  <!--    <link rel="stylesheet" href="./css/index.css">-->
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+    p {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    a {
+      color: teal;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      color: turquoise;
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .header__vote-button {
+      width: 176px;
+      height: 71px;
+      background-color: #811ebd;
+      color: white;
+      font-size: 24px;
+      border-radius: 10px;
+      margin-right: 20px;
+      border: none;
+      transition: 0.3s;
+    }
+
+    .header__vote-button:hover {
+      background-color: #8f4cb8;
+      box-shadow: 0px 0px 2px rgb(162, 162, 162);
+    }
+
+    .header__contacts-container {}
+
+    .header__heading {
+      margin: 0;
+      padding: 0;
+    }
+
+    .header__mail {
+      margin: 0;
+      padding: 0;
+    }
+
+    .href {}
+
+
+    .main {
+      /* width: 600px; */
+      margin: auto;
+
+    }
+
+    .title1 {
+      font-size: 26px;
+      text-align: center;
+      margin: 5px;
+    }
+
+    .info {
+      font-size: 15px;
+    }
+
+    .title2 {
+      margin: 7px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .complaintTheme {
+      font-size: 18px;
+      border: 2px solid black;
+      padding: 7px;
+      border-radius: 10px;
+      background: #F1D543;
+      box-sizing: border-box;
+    }
+
+    .complaintTheme:focus{
+      outline: none;
+      box-shadow: none;
+    }
+    .complaintTheme:hover{
+      border: 2px solid #4f4f4f;
+    }
+
+    .title3 {
+      font-size: 19px;
+      margin: 5px;
+    }
+
+    .comment {
+      font-size: 18px;
+      width: 300px;
+      height: 100px;
+      background: #F1D543;
+      border: 2px solid #000000;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
+
+    .comment:focus{
+      outline: none;
+      box-shadow: none;
+    }
+    .comment:hover{
+      border: 2px solid #4f4f4f;
+    }
+
+    .sendComplaint {
+      max-width: 120px;
+      background: #F1D543;
+      border: 2px solid #000000;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: .3s;
+      /* line-height: 35px;
+      display: flex;
+      align-items: center;
+      text-align: center; */
+    }
+
+    .sendComplaint:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    .sendComplaint:hover {
+      background: #F1D543;
+      border: 2px solid #4f4f4f;
+    }
+
+    .sendComplaint:active {
+      background: #f14363;
+      border: 2px solid #4f4f4f;
+    }
+
+    .back {
+      max-width: 120px;
+      background: #F1D543;
+      border: 2px solid #000000;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    .buttons {
+      text-align: center;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  {% include "logo.html" %}
+
+</header>
+
+  <main class="main">
+    <h1 class="title1"> {{ vote.name }}</h1>
+    <p class="info"> {{ vote.date_created }}</p>
+    <p class="info"> {{ vote.times_voted }}</p>
+    <form
+        class="form-popup__form form-popup__form-edit"
+        name="form-name-job"
+        method="post" action="/complaint_ready/">
+      {% csrf_token %}
+    <h2 class="title2"> Выберите категорию </h2>
+    <p><select class="complaintTheme" form="data" name="choose_theme" >
+        <option value="Нарушение правил ТвойГолос">Нарушение правил ТвойГолос</option>
+        <option value="Просто ;)">Просто ;)</option>
+      </select></p>
+
+      <br/>
+    <p class="title3">Опишите проблему:<Br>
+      <textarea type="text"
+      name="complaintDescription"
+      required
+      minlength="2"
+      maxlength="200"
+      autocomplete="on"
+      class="comment"
+      placeholder="Описание"></textarea>
+    </p>
+    <div class="buttons">
+     <button class="sendComplaint" type="submit" value="Отправить" name="send_button">Отправить</button>
+    </div>
+  </form>
+  </main>
+
+</body>
+
+</html>

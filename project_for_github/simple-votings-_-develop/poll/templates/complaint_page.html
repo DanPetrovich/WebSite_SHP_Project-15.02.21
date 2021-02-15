@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Твой голос</title>
+
+    <style>
+     .description {
+      font-size: 18px;
+      width: 300px;
+      height: 100px;
+      background: #F1D543;
+      border: 2px solid #000000;
+      box-sizing: border-box;
+      border-radius: 10px;
+      margin: 5px;
+    }
+
+    .description:focus{
+      outline: none;
+      box-shadow: none;
+    }
+    .description:hover{
+      border: 2px solid #4f4f4f;
+    }
+
+
+    </style>
+</head>
+<body>
+    <header>
+      {% include "logo.html" %}
+
+    </header>
+
+    <main class="main">
+        <h1 class="title1"> Жалоба</h1>
+        <textarea class="description"> {{ comp.description }}
+        </textarea>
+
+        {% if comp.is_answered %}
+            <div>
+                <textarea class="answer"
+                disabled> {{ comp.answer }}
+            </textarea>
+            </div>
+
+        {% endif %}
+
+    </main>
+</body>
+</html>

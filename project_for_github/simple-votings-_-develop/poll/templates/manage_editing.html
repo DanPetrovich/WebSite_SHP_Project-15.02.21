@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <header class="header">
+        {% include "logo.html" %}
+    </header>
+        {% if success == True %}
+            {% if can_edit == True %}
+                <br/>
+                Изменения успешно сохранены!
+            {% else %}
+                <br/>
+                К сожалению, у Вас нет прав на редактирование данного голосования...
+            {%endif%}
+        {% else %}
+            Упс... Произошла ошибка
+        {%endif%}
+</body>
+</html>

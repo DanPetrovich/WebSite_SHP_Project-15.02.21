@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+<div class="container">
+    <div class="logo">
+    <a href="http://127.0.0.1:8000" class="logo-text">ТвойГолос</a>
+    </div>
+    <div id="rect-main">
+        <h1 class="text-main">РЕГИСТРАЦИЯ</h1>
+        <form method="POST">
+        {% csrf_token %}
+            {% if form.non_field_errors %}
+                    <p class="form-error-text">Заполните все поля</p>
+            {% endif %}
+            <div class="form-group">
+
+                <p class="form-text">Логин</p>
+                {{ form.username }}
+                {{ form.username.errors }}
+
+            </div>
+            <div class="form-group">
+
+                <p class="form-text">Электронная почта</p>
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            <div class="form-group">
+                <div class="form-control-pwd-l">
+                <p class="form-text">Пароль</p>
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+                </div>
+                <div class="form-control-pwd-r">
+                <p class="form-text">Пароль(повторно)</p>
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+                </div>
+            </div>
+        <button type="submit" class="submit-btn">Создать</button>
+        <div class="dop-urls">
+                <a href="/login" class="url-text">У меня уже есть учётная запись</a>
+            </div>
+    </form>
+    </div>
+</div>
+</body>
+</html>

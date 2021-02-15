@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}" />
+    <title>Вход</title>
+</head>
+<body>
+<div class="main">
+    <div class="container">
+        <div class="logo">
+        <a href="http://127.0.0.1:8000" class="logo-text">ТвойГолос</a>
+        </div>
+        <div id="rect-main">
+            <h1 class="text-main">АВТОРИЗАЦИЯ</h1>
+                <form method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                    <p class="form-error-text">Неверный логин или пароль</p>
+            {% endif %}
+            <div class="form-group">
+
+                <p class="form-text">Логин</p>
+                {{ form.username }}
+                {{ form.username.errors }}
+
+            </div>
+            <div class="form-group">
+
+                <p class="form-text">Пароль</p>
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+            <div class="dop-urls">
+                <a href="#" class="url-text">Забыли пароль</a><br>
+            </div>
+            <div class="dop-urls">
+                <a href="/registration" class="url-text">Регистрация</a>
+            </div>
+            <button type="submit" class="submit-btn" onclick="Go_to_cabinet()">Войти</button>
+            </form>
+            {% if errors %}
+                {{ form.errors }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    // Переход на страницу кабинета
+    function Go_to_cabinet(){
+        let path = "/cabinet"
+        window.location = path
+    }
+</script>

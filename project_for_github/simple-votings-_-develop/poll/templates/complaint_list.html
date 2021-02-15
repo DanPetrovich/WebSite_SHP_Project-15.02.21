@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Твой голос</title>
+<!--    <link rel="stylesheet" href="./css/index.css">-->
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+a {
+  color: teal;
+  transition: 0.3s;
+}
+a:hover {
+  color: turquoise;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.header__complaint-button {
+  width: 176px;
+  height: 71px;
+  background-color: #811ebd;
+  color: white;
+  font-size: 24px;
+  border-radius: 10px;
+  margin-right: 20px;
+  border: none;
+  transition: 0.3s;
+}
+
+.header__complaint-button:hover {
+  background-color: #8f4cb8;
+  box-shadow: 0px 0px 2px rgb(162, 162, 162);
+}
+
+.complaint__container:hover {
+  /* background-color: #f1d443c0; */
+  opacity: .8;
+  /* box-shadow: 0px 0px 2px rgb(162, 162, 162); */
+}
+
+.header__contacts-container {
+}
+.header__heading {
+  margin: 0;
+  padding: 0;
+}
+.header__mail {
+  margin: 0;
+  padding: 0;
+}
+
+
+.complaint__container {
+  border-right: 2px solid #ccc; /* Параметры линии */
+  max-width: 690px;
+  background: #F1D543;
+  border-radius: 10px;
+  border: black;
+  color: #080803;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  /* align-items: flex-start; */
+  margin: 0px auto 20px auto;
+  /* border: black 2px solid; */
+  /* box-shadow: black 2px 2px; */
+  filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.15));
+
+}
+.complaint__contacts-container {
+}
+.complaint__text {
+  margin: 0;
+  padding: 0;
+}
+.complaint__description {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+
+
+}
+.complaint__name_to-contain {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 7px;
+  margin-right: 10px;
+
+}
+.complaint__like {
+  font-weight: 700;
+  color: black;
+}
+.complaint__header {
+  max-width: 690px;
+  padding: 10px;
+  margin: 20px auto 0px auto;
+
+}
+
+.complaint__v-line {
+  background-color:#505050;
+  width: 1px;
+  /* height: 100%; */
+}
+.complaint__like-image{
+  background-image: url('./poll/templates/images/like.png');
+  width: 38px;
+  height: 22px;
+}
+.complaint__comment-image{
+  background-image: url('./simple-votings-_/poll/templates/images/comment.png');
+  width: 38px;
+  height: 22px;
+}
+
+.complaint_name_to-image-text{
+  display: flex;
+  margin-bottom: 15px;
+
+}
+    </style>
+</head>
+<body>
+    <!-- Логотип , ник и мейл -->
+    <header class="header">
+        {% include "logo.html" %}
+    </header>
+    <br/>
+    <br/>
+
+        <h2 class="complaint__header">Ваши жалобы </h2>
+        {% for element in list %}
+            <p name='date'> {{ element.date_created }} </p>
+            <div class="complaint__container" onclick= "Go_to_page('{{element.id}}')">
+            <div class="complaint__contacts-container">
+                <h2 class="complaint__text">{{ element.description }}</h2>
+            </div>
+            </p>
+            <div class="complaint__v-line"></div>
+            <div class="complaint__name_to-contain">
+                <div class="complaint_name_to-image-text">
+
+                </div>
+                <div class="complaint_name_to-image-text">
+                    <div class="complaint__like"> {{ element.name }}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+</body>
+</html>
+
+<script>
+    // Переход на страницу, отображающую конкретную жалобу
+    function Go_to_page(id){
+        let path = "/complaint_page?id="+id
+        window.location = path
+    }
+</script>
